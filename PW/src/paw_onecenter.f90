@@ -260,6 +260,10 @@ MODULE paw_onecenter
     CALL mp_sum(energy_tot, intra_image_comm)
     IF( mykey /= 0 ) d = 0.0d0
     CALL mp_sum(d, intra_image_comm)
+    IF ( PRESENT(e_cmp) ) THEN
+        IF ( mykey /= 0 ) e_cmp = 0.0d0
+        CALL mp_sum(e_cmp, intra_image_comm)
+    END IF
 #endif
     ! put energy back in the output variable
     IF ( PRESENT(energy) ) energy = energy_tot
